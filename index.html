@@ -1,0 +1,809 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Nimra!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@400;600;700&family=Dancing+Script:wght@700&display=swap');
+        
+        :root {
+            --color-primary: #FF6B6B;
+            --color-secondary: #4ECDC4;
+            --color-accent: #FFE66D;
+            --color-dark: #292F36;
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: var(--color-primary);
+            opacity: 0;
+        }
+        
+        .bounce {
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .rotate {
+            animation: rotate 10s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .twinkle {
+            animation: twinkle 1s ease-in-out infinite alternate;
+        }
+        
+        @keyframes twinkle {
+            from { opacity: 0.5; }
+            to { opacity: 1; }
+        }
+        
+        .slide-in-left {
+            animation: slideInLeft 1.5s forwards;
+        }
+        
+        @keyframes slideInLeft {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .slide-in-right {
+            animation: slideInRight 1.5s forwards;
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .fade-in {
+            animation: fadeIn 2s forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .balloon {
+            position: absolute;
+            width: 50px;
+            height: 65px;
+            border-radius: 50%;
+            z-index: -1;
+        }
+        
+        .balloon:before {
+            content: "";
+            position: absolute;
+            width: 1px;
+            height: 50px;
+            background-color: rgba(0,0,0,0.2);
+            transform-origin: top;
+            transform: translateX(-50%);
+            left: 50%;
+            top: 65px;
+        }
+        
+        .shadow {
+            filter: drop-shadow(0px 10px 5px rgba(0,0,0,0.2));
+        }
+        
+        .cake {
+            position: relative;
+            width: 200px;
+            height: 120px;
+            background: linear-gradient(to bottom, #f9d5bb, #f3a281);
+            border-radius: 100px 100px 0 0;
+            margin: 0 auto;
+        }
+        
+        .cake:before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 30px;
+            background: linear-gradient(to bottom, #f3a281, #f9d5bb);
+            top: -15px;
+            border-radius: 100px;
+        }
+        
+        .candle {
+            position: absolute;
+            width: 10px;
+            height: 40px;
+            background: linear-gradient(to bottom, #fff, #f3f3f3);
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .candle:after {
+            content: "";
+            position: absolute;
+            width: 10px;
+            height: 3px;
+            background: #ff9500;
+            top: -3px;
+            border-radius: 50%;
+        }
+        
+        .flame {
+            position: absolute;
+            width: 15px;
+            height: 25px;
+            background: linear-gradient(to bottom, #ff9500, #ffcc00);
+            border-radius: 50% 50% 20% 20%;
+            top: -28px;
+            left: 50%;
+            transform: translateX(-50%);
+            filter: blur(1px);
+            animation: flicker 0.5s infinite alternate;
+        }
+        
+        @keyframes flicker {
+            0%, 100% { transform: translateX(-50%) scaleY(1); }
+            50% { transform: translateX(-50%) scaleY(1.1); }
+        }
+        
+        .present {
+            position: relative;
+            width: 100px;
+            height: 80px;
+            background: #FF6B6B;
+            border-radius: 5px;
+        }
+        
+        .present:before {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #cc5656;
+        }
+        
+        .present:after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #cc5656;
+        }
+        
+        .ribbon {
+            position: absolute;
+            width: 15px;
+            height: 40px;
+            background: #4ECDC4;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .ribbon:after {
+            content: "";
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: #48b9b1;
+            bottom: -15px;
+            border-radius: 50%;
+        }
+        
+        .scroll-indicator {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 50px;
+            border: 2px solid #fff;
+            border-radius: 15px;
+            opacity: 0.7;
+            animation: bounce 2s infinite;
+        }
+        
+        .scroll-indicator:before {
+            content: "";
+            position: absolute;
+            width: 4px;
+            height: 10px;
+            background: #fff;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+            animation: scroll 2s infinite;
+        }
+        
+        @keyframes scroll {
+            0% { top: 10px; opacity: 1; }
+            100% { top: 25px; opacity: 0; }
+        }
+        
+        /* Shooting Stars */
+        .shooting-star {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            filter: drop-shadow(0 0 6px white);
+            z-index: -1;
+        }
+        
+        .shooting-star:before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 50px;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+            transform: translateX(2px);
+        }
+          .font-dancing {
+      font-family: 'Dancing Script', cursive;
+    }
+
+      .font-dancing {
+      font-family: 'Dancing Script', cursive;
+    }
+
+    #flame {
+      box-shadow: 0 0 10px 4px rgba(255, 165, 0, 0.6);
+      animation: flicker 0.3s infinite;
+    }
+
+    @keyframes flicker {
+      0%   { transform: scale(1) translateY(0); opacity: 1; }
+      50%  { transform: scale(1.2) translateY(-2px); opacity: 0.8; }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
+    }
+    </style>
+</head>
+<body class="bg-yellow-400 min-h-screen font-montserrat overflow-x-hidden">
+    <!-- Audio -->
+    <audio id="birthdaySong">
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg" id="fallbackAudio">
+    </audio>
+    
+    <!-- Shooting Stars -->
+    <div id="stars-container" class="fixed top-0 left-0 w-full h-full pointer-events-none"></div>
+    
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator z-50"></div>
+    
+    <!-- Hero Section -->
+    <section id="hero" class="min-h-screen flex flex-col justify-center items-center relative overflow-hidden">
+        <div class="text-center z-10 px-4">
+            <h1 class="text-6xl md:text-8xl font-bold text-white font-pacifico mb-6 slide-in-left">Happy Birthday!</h1>
+            <div class="relative inline-block">
+                <h2 id="name" class="text-5xl md:text-7xl font-bold text-pink-600 font-dancing script mb-8 bg-white px-8 py-4 rounded-full shadow-xl slide-in-right">Nimra</h2>
+                <div class="absolute -top-4 -right-4 w-12 h-12 bg-yellow-500 rounded-full animate-bounce"></div>
+                <div class="absolute -bottom-4 -left-4 w-12 h-12 bg-yellow-500 rounded-full animate-bounce animation-delay-200"></div>
+            </div>
+            
+            <p class="text-xl md:text-2xl text-white font-semibold mb-8 mt-4 fade-in">Wishing you a day filled with joy, laughter and happiness!</p>
+            
+            <button id="playButton" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-4 px-8 rounded-full text-xl shadow-lg transform hover:scale-110 transition-transform duration-300 fade-in mr-4">
+                Play Music
+            </button>
+            
+            <button id="confettiButton" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-4 px-8 rounded-full text-xl shadow-lg transform hover:scale-110 transition-transform duration-300 fade-in">
+                Throw Confetti
+            </button>
+        </div>
+        
+        <div class="absolute bottom-10 left-0 w-full flex justify-center">
+            <svg class="w-10 h-10 text-white animate-bounce cursor-pointer" id="scrollDown" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+        </div>
+    </section>
+    
+    <!-- Message Section -->
+    <section id="message" class="py-20 px-4 md:px-0 bg-yellow-300">
+        <div class="max-w-4xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden transform -rotate-1">
+            <div class="p-10 md:p-16">
+                <h2 class="text-3xl md:text-5xl font-bold text-center text-purple-700 font-dancing mb-10">A Special Message For You</h2>
+                
+                <div class="space-y-8 text-gray-800 leading-relaxed text-lg">
+                    <p class="fade-in animation-delay-100">Dear <span class="font-bold text-pink-600">Nimra</span>,</p>
+                    
+                    <p class="fade-in animation-delay-300">On this special day, I want to take a moment to celebrate you - the amazing person that you are! Your smile brightens every room, your kindness touches every heart, and your spirit inspires everyone around you.</p>
+                    
+                    <p class="fade-in animation-delay-500">Birthdays are nature's way of telling us to eat more cake, so I hope you indulge in all your favorite treats today. May this year bring you endless happiness, wonderful adventures, and dreams that come true.</p>
+                    
+                    <p class="fade-in animation-delay-700">You deserve all the love, joy, and success in the world. I'm sending you the warmest birthday wishes filled with happiness that lasts throughout the year!</p>
+                    
+                    <p class="fade-in animation-delay-900">With lots of love and best wishes,</p>
+                    <p class="fade-in animation-delay-900 mt-8 font-bold text-purple-600">Your Well-Wisher</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 px-4 bg-yellow-200">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-center text-purple-700 mb-16 font-dancing">Memory Lane</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Photo 1 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-xl transform transition-all duration-500 hover:scale-105 group relative">
+                    <img src="Cake 3.jpg" alt="Nimra" class="w-full h-64 object-cover">
+                    <div class="absolute inset-0 bg-purple-600 bg-opacity-70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-white text-center p-4 text-lg">Beautiful memories with you!</p>
+                    </div>
+                </div>
+                
+                <!-- Photo 2 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-xl transform transition-all duration-500 hover:scale-105 group relative">
+                    <img src="Cake  2.jpg" alt="Nimra" class="w-full h-64 object-cover">
+                    <div class="absolute inset-0 bg-pink-600 bg-opach.com/photo-1517841905240-472988babdf9?ixlib=rbity-70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-white text-center p-4 text-lg">Your radiant smile!</p>
+                    </div>
+                </div>
+                
+                <!-- Photo 3 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-xl transform transition-all duration-500 hover:scale-105 group relative">
+                    <img src="Cake 1.jpg" alt="Nimra" class="w-full h-64 object-cover">
+                    <div class="absolute inset-0 bg-blue-600 bg-opacity-70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-white text-center p-4 text-lg">A special moment!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <body class="bg-yellow-300 min-h-screen flex items-center justify-center px-4">
+
+  <!-- Cake Section -->
+  <section id="cake" class="w-full max-w-4xl text-center">
+    <h2 class="text-4xl md:text-5xl font-bold text-purple-700 mb-16 font-dancing">Make a Wish!</h2>
+
+    <div class="relative h-64 flex items-center justify-center">
+      <div class="relative w-32 h-40 cursor-pointer transform hover:scale-110 transition-transform duration-500" id="birthday-cake">
+        <!-- Cake Base -->
+        <div class="absolute bottom-0 w-32 h-24 bg-pink-500 rounded-b-lg shadow-lg"></div>
+        <div class="absolute bottom-24 w-28 h-4 bg-white rounded-full mx-auto left-1/2 -translate-x-1/2"></div>
+
+        <!-- Candle -->
+        <div class="absolute top-2 left-1/2 -translate-x-1/2 w-2 h-10 bg-yellow-500 rounded-sm"></div>
+
+        <!-- Flame -->
+        <div id="flame" class="absolute top-0 left-1/2 -translate-x-1/2 w-3 h-3 bg-orange-400 rounded-full"></div>
+      </div>
+    </div>
+
+    <button id="blowCandle" class="mt-12 bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transform hover:scale-110 transition-transform duration-300">
+      Blow Out Candles
+    </button>
+  </section>
+
+    <section id="wishes" class="py-20 px-4 bg-yellow-400">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-center text-white mb-16 font-dancing">Birthday Wishes</h2>
+            
+            <div class="space-y-8">
+                <!-- Wish 1 -->
+                <div class="bg-white bg-opacity-90 p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform duration-300">
+                    <div class="flex items-start">
+                        <div class="bg-yellow-500 text-white font-bold rounded-full w-16 h-16 flex items-center justify-center text-2xl mr-4 shadow">1</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-purple-700 mb-2">Happiness & Joy</h3>
+                            <p class="text-gray-700">Wishing you a day filled with boundless joy and happiness that lasts all year through!</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Wish 2 -->
+                <div class="bg-white bg-opacity-90 p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform duration-300">
+                    <div class="flex items-start">
+                        <div class="bg-pink-500 text-white font-bold rounded-full w-16 h-16 flex items-center justify-center text-2xl mr-4 shadow">2</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-purple-700 mb-2">Love & Laughter</h3>
+                            <p class="text-gray-700">May your special day be filled with love, laughter, and all the happiness your heart can hold!</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Wish 3 -->
+                <div class="bg-white bg-opacity-90 p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform duration-300">
+                    <div class="flex items-start">
+                        <div class="bg-purple-500 text-white font-bold rounded-full w-16 h-16 flex items-center justify-center text-2xl mr-4 shadow">3</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-purple-700 mb-2">Success & Prosperity</h3>
+                            <p class="text-gray-700">Wishing you success in all your endeavors and prosperity in the coming year!</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Wish 4 -->
+                <div class="bg-white bg-opacity-90 p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform duration-300">
+                    <div class="flex items-start">
+                        <div class="bg-blue-500 text-white font-bold rounded-full w-16 h-16 flex items-center justify-center text-2xl mr-4 shadow">4</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-purple-700 mb-2">Health & Wellness</h3>
+                            <p class="text-gray-700">May this year bring you good health, peace of mind, and wellness in everything you do!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Gifts Section -->
+    <section id="gifts" class="py-20 px-4 bg-yellow-500">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-bold text-white mb-16 font-dancing">Your Gifts Are Here!</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="relative h-64 flex items-center justify-center">
+                    <div class="present mx-auto"></div>
+                    <button class="mt-4 text-white font-bold underline hover:text-yellow-300 transition-colors duration-300 absolute bottom-0 left-0 right-0" onclick="openGift(1)">Open Gift 1</button>
+                </div>
+                
+                <div class="relative h-64 flex items-center justify-center">
+                    <div class="present mx-auto" style="background-color: #4ECDC4;"></div>
+                    <button class="mt-4 text-white font-bold underline hover:text-yellow-300 transition-colors duration-300 absolute bottom-0 left-0 right-0" onclick="openGift(2)">Open Gift 2</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Hidden Gift Messages -->
+        <div id="gift-message-1" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4">
+            <div class="bg-white rounded-2xl p-8 max-w-md relative">
+                <button class="absolute top-4 right-4 text-gray-500 hover:text-gray-700" onclick="closeGift(1)">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+                <h3 class="text-2xl font-bold text-purple-700 mb-4">Gift #1 for You!</h3>
+                <p class="text-gray-700 mb-6">This is your first gift-The happiest of birthdays!</p>
+                <img src="Gallery 1.jpg" alt="Gift" class="rounded-lg w-full">
+            </div>
+        </div>
+        
+        <div id="gift-message-2" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4">
+            <div class="bg-white rounded-2xl p-8 max-w-md relative">
+                <button class="absolute top-4 right-4 text-gray-500 hover:text-gray-700" onclick="closeGift(2)">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+                <h3 class="text-2xl font-bold text-purple-700 mb-4">Gift #2 for You!</h3>
+                <p class="text-gray-700 mb-6">Your second gift is  Happy birthday Nimra!</p>
+                <img src="Gallery 2.jpg" alt="Gift class="rounded-lg w-full">
+            </div>
+        </div>
+    </section
+    
+    <!-- Final Section -->
+    <section id="final" class="py-20 px-4 bg-yellow-600">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="bg-white bg-opacity-20 backdrop-blur-lg rounded-3xl p-8 md:p-12 shadow-xl">
+                <h2 class="text-4xl md:text-6xl font-bold text-white mb-8 font-dancing">Happy Birthday Nimra!</h2>
+                
+                <p class="text-xl text-white mb-8">Wishing you a day as beautiful and special as you are!</p>
+                
+                <div class="flex justify-center space-x-6 mb-10">
+                    <div class="w-16 h-16 rounded-full bg-yellow-500 flex items-center justify-center shadow-lg">
+                        <span class="text-2xl">🎉</span>
+                    </div>
+                    <div class="w-16 h-16 rounded-full bg-pink-500 flex items-center justify-center shadow-lg">
+                        <span class="text-2xl">🎂</span>
+                    </div>
+                    <div class="w-16 h-16 rounded-full bg-purple-500 flex items-center justify-center shadow-lg">
+                        <span class="text-2xl">🎁</span>
+                    </div>
+                    <div class="w-16 h-16 rounded-full bg-blue-500 flex items-center justify-center shadow-lg">
+                        <span class="text-2xl">✨</span>
+                    </div>
+                </div>
+                
+                <p class="text-white text-lg mb-8">Thank you for being the wonderful person that you are. May all your dreams and wishes come true this year!</p>
+                
+                <button id="finalConfetti" class="bg-white text-purple-600 hover:bg-purple-100 font-bold py-4 px-8 rounded-full text-lg shadow-lg transform hover:scale-110 transition-transform duration-300">
+                    One More Celebration!
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        // Shooting stars creation
+        function createShootingStar() {
+            const star = document.createElement('div');
+            star.className = 'shooting-star';
+            star.style.left = Math.random() * 100 + 'vw';
+            star.style.top = Math.random() * 30 + 'vh';
+            star.style.opacity = Math.random() * 0.5 + 0.5;
+            
+            document.getElementById('stars-container').appendChild(star);
+            
+            const animationDuration = Math.random() * 3 + 2;
+            
+            gsap.to(star, {
+                x: (Math.random() - 0.5) * 500,
+                y: (Math.random() - 0.5) * 500,
+                opacity: 0,
+                duration: animationDuration,
+                ease: 'power1.out',
+                onComplete: () => {
+                    star.remove();
+                    createShootingStar();
+                }
+            });
+        }
+        
+        // Create initial shooting stars
+        for(let i = 0; i < 10; i++) {
+            createShootingStar();
+            gsap.delayedCall(i * 0.8, createShootingStar);
+        }
+        
+        // Name animation
+        const name = document.getElementById('name');
+        name.addEventListener('mouseover', () => {
+            gsap.to(name, {
+                scale: 1.1,
+                rotation: '5deg',
+                color: '#ff4757',
+                duration: 0.5,
+                ease: 'elastic.out(1, 0.3)'
+            });
+        });
+        
+        name.addEventListener('mouseout', () => {
+            gsap.to(name, {
+                scale: 1,
+                rotation: '0deg',
+                color: '#E91E63',
+                duration: 0.5,
+                ease: 'back.out'
+            });
+        });
+        
+        // Play music button with Happy Birthday song
+        const playButton = document.getElementById('playButton');
+        const birthdaySong = document.getElementById('birthdaySong');
+        let isPlaying = false;
+        
+        // Replace audio source with Happy Birthday song (30 seconds)
+        birthdaySong.innerHTML = '<source src="https://assets.mixkit.co/music/preview/mixkit-happy-birthday-to-you-in-jazz-1120.mp3" type="audio/mpeg">';
+        
+        // Set song to stop after 30 seconds
+        birthdaySong.addEventListener('timeupdate', function() {
+            if(this.currentTime > 30) {
+                this.pause();
+                this.currentTime = 0;
+                playButton.textContent = 'Play Music';
+                playButton.classList.remove('bg-pink-700');
+                playButton.classList.add('bg-pink-600');
+                isPlaying = false;
+            }
+        });
+        
+        playButton.addEventListener('click', () => {
+            if(isPlaying) {
+                birthdaySong.pause();
+                playButton.textContent = 'Play Music';
+                playButton.classList.remove('bg-pink-700');
+                playButton.classList.add('bg-pink-600');
+            } else {
+                birthdaySong.currentTime = 0;
+                birthdaySong.play();
+                playButton.textContent = 'Pause Music';
+                playButton.classList.remove('bg-pink-600');
+                playButton.classList.add('bg-pink-700');
+            }
+            isPlaying = !isPlaying;
+        });
+        
+        // Confetti function
+        function createConfetti() {
+            const colors = ['#FF6B6B', '#FFE66D', '#4ECDC4', '#F7FFF7', '#FF9F1C', '#6BFFB8', '#A67DB8'];
+            
+            for(let i = 0; i < 200; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = '-10px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.transform = 'rotate(' + Math.random() * 360 + 'deg)';
+                
+                document.body.appendChild(confetti);
+                
+                const animationDuration = Math.random() * 3 + 2;
+                
+                gsap.to(confetti, {
+                    y: window.innerHeight,
+                    x: (Math.random() - 0.5) * 200,
+                    rotation: Math.random() * 360,
+                    opacity: 1,
+                    duration: animationDuration,
+                    ease: 'power1.in',
+                    onComplete: () => {
+                        confetti.remove();
+                    }
+                });
+            }
+        }
+        
+        // Confetti buttons
+        document.getElementById('confettiButton').addEventListener('click', createConfetti);
+        document.getElementById('finalConfetti').addEventListener('click', createConfetti);
+        
+        // Blow out candles
+        document.getElementById('blowCandle').addEventListener('click', function() {
+            const flame = document.querySelector('.flame');
+            const button = this;
+            
+            gsap.to(flame, {
+                scale: 0,
+                duration: 0.5,
+                ease: 'power1.in',
+                onComplete: () => {
+                    flame.style.display = 'none';
+                    button.textContent = 'Candles Blown Out!';
+                    button.classList.remove('bg-purple-600');
+                    button.classList.add('bg-gray-500');
+                    button.setAttribute('disabled', '');
+                    
+                    // Small confetti
+                    setTimeout(createConfetti, 500);
+                }
+            });
+        });
+        
+        // Gift functions
+        function openGift(giftNumber) {
+            document.getElementById(`gift-message-${giftNumber}`).classList.remove('hidden');
+        }
+        
+        function closeGift(giftNumber) {
+            document.getElementById(`gift-message-${giftNumber}`).classList.add('hidden');
+        }
+        
+        // Scroll to sections
+        document.getElementById('scrollDown').addEventListener('click', () => {
+            gsap.to(window, {
+                scrollTo: '#message',
+                duration: 1,
+                ease: 'power2.inOut'
+            });
+        });
+        
+        // Scroll animations
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Animate sections on scroll
+        gsap.utils.toArray('section').forEach(section => {
+            ScrollTrigger.create({
+                trigger: section,
+                start: 'top 70%',
+                onEnter: () => {
+                    gsap.from(section.querySelectorAll('h2'), {
+                        y: 50,
+                        opacity: 0,
+                        duration: 1,
+                        ease: 'power3.out'
+                    });
+                }
+            });
+        });
+        
+        // Animation for elements in message section
+        gsap.utils.toArray('.fade-in').forEach((el, i) => {
+            gsap.from(el, {
+                scrollTrigger: {
+                    trigger: el,
+                    start: 'top 80%'
+                },
+                opacity: 0,
+                y: 20,
+                duration: 1,
+                delay: i * 0.1,
+                ease: 'power2.out'
+            });
+        });
+        
+        // Animation for gallery items
+        gsap.utils.toArray('#gallery .grid > div').forEach((el, i) => {
+            gsap.from(el, {
+                scrollTrigger: {
+                    trigger: el,
+                    start: 'top 75%'
+                },
+                opacity: 0,
+                y: 50,
+                duration: 0.8,
+                delay: i * 0.1,
+                ease: 'back.out(1)'
+            });
+        });
+        
+        // Animation for wishes section
+        gsap.utils.toArray('#wishes .space-y-8 > div').forEach((el, i) => {
+            gsap.from(el, {
+                scrollTrigger: {
+                    trigger: el,
+                    start: 'top 75%'
+                },
+                x: i % 2 === 0 ? -100 : 100,
+                opacity: 0,
+                duration: 0.8,
+                delay: i * 0.15,
+                ease: 'power3.out'
+            });
+        });
+        
+        // Cake animation
+        gsap.from('#birthday-cake', {
+            scrollTrigger: {
+                trigger: '#cake',
+                start: 'top 60%'
+            },
+            scale: 0,
+            rotation: 180,
+            duration: 1.5,
+            ease: 'elastic.out(1, 0.5)'
+        });
+        
+        // Final section animation
+        gsap.from('#final div', {
+            scrollTrigger: {
+                trigger: '#final',
+                start: 'top 60%'
+            },
+            opacity: 0,
+            y: 100,
+            duration: 1,
+            ease: 'back.out(1)'
+        });
+           document.getElementById('blowCandle').addEventListener('click', () => {
+      const flame = document.getElementById('flame');
+      if (flame) flame.style.display = 'none';
+    });
+    </script>
+</body>
+</html>
